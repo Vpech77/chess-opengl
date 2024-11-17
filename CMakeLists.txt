@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.5)
+
+project(tp LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+include_directories(src)
+include_directories(src/interface_graphique)
+
+add_subdirectory(src/interface_graphique)
+
+add_executable(chessProj src/main.cpp)
+
+target_link_libraries(chessProj glfw GLEW libGLEW.so libGLU.so libGL.so interface_graphique)
