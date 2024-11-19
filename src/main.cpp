@@ -14,6 +14,8 @@
 
 #include "loadModel.h"
 
+#include "plato.h"
+
 glm::mat4 mvpObject(glm::vec3 pos, Object& o, Camera& cam){
 
     o.position = pos;
@@ -110,18 +112,23 @@ int main()
     Object o(verticesCase, uvsCase, path+"/textures/caseNoire.png");
     Object o2(verticesCase, uvsCase, path+"/textures/caseBlanche.png");
 
+    // Plato p;
+
+    // Object o = p.caseWhite;
+    // Object o2 = p.caseBlack;
+    glm::mat4 mvp;
 
 
 /////////////////////////Création de la matrice MVP/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    cam.computeMatrices(width, height);
-    glm::mat4 m = o.getModelMatrix();
-    glm::mat4 v = cam.getViewMatrix();
-    glm::mat4 p = cam.getProjectionMatrix();
+    // cam.computeMatrices(width, height);
+    // glm::mat4 m = o.getModelMatrix();
+    // glm::mat4 v = cam.getViewMatrix();
+    // glm::mat4 p = cam.getProjectionMatrix();
 
-    glm::mat4 mvp = p*v*m;
+    // glm::mat4 mvp = p*v*m;
 
-    shader.setUniformMat4f("MVP", mvp);
+    // shader.setUniformMat4f("MVP", mvp);
 
 
 
@@ -159,6 +166,9 @@ int main()
         ////////////////On commence par vider les buffers///////////////
         renderer.Clear();
         // renderer.Draw(va, o, shader);
+
+    
+        // p.Draw(va, cam, shader, renderer);
 
         int nbCase = 8;
 
