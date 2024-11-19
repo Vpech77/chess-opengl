@@ -23,7 +23,6 @@ glm::mat4 mvpObject(glm::vec3 pos, Object& o, Camera& cam){
     return mvp;
 }
 
-
 using namespace std;
 
 int main()
@@ -224,22 +223,9 @@ int main()
         deltaTime = currentTime-lastTime;
         lastTime = currentTime;
 
-        // o.rotationAngles.y=currentTime;
-
-
-
         controls.update(deltaTime, &shader);
         cam.computeMatrices(width, height);
 
-        // o.position.x=0;
-        // o.position.z=0;
-
-        // m = o.getModelMatrix();
-        // v = cam.getViewMatrix();
-        // p = cam.getProjectionMatrix();
-
-        // mvp = p*v*m;
-        // shader.setUniformMat4f("MVP", mvp);
 
         ////////////////On commence par vider les buffers///////////////
         renderer.Clear();
@@ -288,27 +274,6 @@ int main()
             }
         }
         std::cout<<"-------------------------------------------\n";
-
-        // o.position.z=2.25;
-        // o.position.x=2.25;
-        // m = o.getModelMatrix();
-        // v = cam.getViewMatrix();
-        // p = cam.getProjectionMatrix();
-
-        // mvp = p*v*m;
-        // shader.setUniformMat4f("MVP", mvp);
-        // renderer.Draw(va, o, shader);
-
-
-        // o2.position.x=2;
-        // m = o2.getModelMatrix();
-        // v = cam.getViewMatrix();
-        // p = cam.getProjectionMatrix();
-
-        // mvp = p*v*m;
-        // shader.setUniformMat4f("MVP", mvp);
-        // renderer.Draw(va, o2, shader);
-
 
         ////////////////Partie rafraichissement de l'image et des évènements///////////////
         //Swap buffers : frame refresh
