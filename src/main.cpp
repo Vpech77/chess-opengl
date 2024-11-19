@@ -12,6 +12,8 @@
 #include "camera.h"
 #include "navigationcontrols.h"
 
+#include "loadModel.h"
+
 glm::mat4 mvpObject(glm::vec3 pos, Object& o, Camera& cam){
 
     o.position = pos;
@@ -101,87 +103,14 @@ int main()
 
 /////////////////////////Création des formes à afficher/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    std::vector<glm::vec3> verticesCase;
+	std::vector<glm::vec2> uvsCase;
+	std::vector<glm::vec3> normalsCase; // Won't be used at the moment.
+	bool resCase = loadOBJ("/home/vpech/Documents/Github/Chess-OpenGL/src/model/case.obj", verticesCase, uvsCase, normalsCase);
+    Object o(verticesCase, uvsCase, path+"/textures/caseNoire.png");
+    Object o2(verticesCase, uvsCase, path+"/textures/caseBlanche.png");
 
-    vector<glm::vec3> g_vertex_buffer_data = {
-        glm::vec3(-1.0f,-1.0f,-1.0f), // triangle 1 : begin
-        glm::vec3(-1.0f,-1.0f, 1.0f),
-        glm::vec3(-1.0f, 1.0f, 1.0f), // triangle 1 : end
-        glm::vec3(1.0f, 1.0f,-1.0f), // triangle 2 : begin
-        glm::vec3(-1.0f,-1.0f,-1.0f),
-        glm::vec3(-1.0f, 1.0f,-1.0f), // triangle 2 : end
-        glm::vec3(1.0f,-1.0f, 1.0f),
-        glm::vec3(-1.0f,-1.0f,-1.0f),
-        glm::vec3(1.0f,-1.0f,-1.0f),
-        glm::vec3(1.0f, 1.0f,-1.0f),
-        glm::vec3(1.0f,-1.0f,-1.0f),
-        glm::vec3(-1.0f,-1.0f,-1.0f),
-        glm::vec3(-1.0f,-1.0f,-1.0f),
-        glm::vec3(-1.0f, 1.0f, 1.0f),
-        glm::vec3(-1.0f, 1.0f,-1.0f),
-        glm::vec3(1.0f,-1.0f, 1.0f),
-        glm::vec3(-1.0f,-1.0f, 1.0f),
-        glm::vec3(-1.0f,-1.0f,-1.0f),
-        glm::vec3(-1.0f, 1.0f, 1.0f),
-        glm::vec3(-1.0f,-1.0f, 1.0f),
-        glm::vec3(1.0f,-1.0f, 1.0f),
-        glm::vec3(1.0f, 1.0f, 1.0f),
-        glm::vec3(1.0f,-1.0f,-1.0f),
-        glm::vec3(1.0f, 1.0f,-1.0f),
-        glm::vec3(1.0f,-1.0f,-1.0f),
-        glm::vec3(1.0f, 1.0f, 1.0f),
-        glm::vec3(1.0f,-1.0f, 1.0f),
-        glm::vec3(1.0f, 1.0f, 1.0f),
-        glm::vec3(1.0f, 1.0f,-1.0f),
-        glm::vec3(-1.0f, 1.0f,-1.0f),
-        glm::vec3(1.0f, 1.0f, 1.0f),
-        glm::vec3(-1.0f, 1.0f,-1.0f),
-        glm::vec3(-1.0f, 1.0f, 1.0f),
-        glm::vec3(1.0f, 1.0f, 1.0f),
-        glm::vec3(-1.0f, 1.0f, 1.0f),
-        glm::vec3(1.0f,-1.0f, 1.0f)
-    };
 
-    vector<glm::vec2> g_uv_buffer_data = {
-        glm::vec2(0.000059f, 1.0f-0.000004f),
-        glm::vec2(0.000103f, 1.0f-0.336048f),
-        glm::vec2(0.335973f, 1.0f-0.335903f),
-        glm::vec2(1.000023f, 1.0f-0.000013f),
-        glm::vec2(0.667979f, 1.0f-0.335851f),
-        glm::vec2(0.999958f, 1.0f-0.336064f),
-        glm::vec2(0.667979f, 1.0f-0.335851f),
-        glm::vec2(0.336024f, 1.0f-0.671877f),
-        glm::vec2(0.667969f, 1.0f-0.671889f),
-        glm::vec2(1.000023f, 1.0f-0.000013f),
-        glm::vec2(0.668104f, 1.0f-0.000013f),
-        glm::vec2(0.667979f, 1.0f-0.335851f),
-        glm::vec2(0.000059f, 1.0f-0.000004f),
-        glm::vec2(0.335973f, 1.0f-0.335903f),
-        glm::vec2(0.336098f, 1.0f-0.000071f),
-        glm::vec2(0.667979f, 1.0f-0.335851f),
-        glm::vec2(0.335973f, 1.0f-0.335903f),
-        glm::vec2(0.336024f, 1.0f-0.671877f),
-        glm::vec2(1.000004f, 1.0f-0.671847f),
-        glm::vec2(0.999958f, 1.0f-0.336064f),
-        glm::vec2(0.667979f, 1.0f-0.335851f),
-        glm::vec2(0.668104f, 1.0f-0.000013f),
-        glm::vec2(0.335973f, 1.0f-0.335903f),
-        glm::vec2(0.667979f, 1.0f-0.335851f),
-        glm::vec2(0.335973f, 1.0f-0.335903f),
-        glm::vec2(0.668104f, 1.0f-0.000013f),
-        glm::vec2(0.336098f, 1.0f-0.000071f),
-        glm::vec2(0.000103f, 1.0f-0.336048f),
-        glm::vec2(0.000004f, 1.0f-0.671870f),
-        glm::vec2(0.336024f, 1.0f-0.671877f),
-        glm::vec2(0.000103f, 1.0f-0.336048f),
-        glm::vec2(0.336024f, 1.0f-0.671877f),
-        glm::vec2(0.335973f, 1.0f-0.335903f),
-        glm::vec2(0.667969f, 1.0f-0.671889f),
-        glm::vec2(1.000004f, 1.0f-0.671847f),
-        glm::vec2(0.667979f, 1.0f-0.335851f)
-    };
-
-    Object o(g_vertex_buffer_data, g_uv_buffer_data, path+"/textures/white.png");
-    Object o2(g_vertex_buffer_data, g_uv_buffer_data, path+"/textures/noir.png");
 
 /////////////////////////Création de la matrice MVP/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
