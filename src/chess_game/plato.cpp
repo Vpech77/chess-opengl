@@ -28,53 +28,41 @@ Plato::~Plato()
     delete caseWhite;
 }
 
-glm::mat4 mvpObject(glm::vec3 pos, Object& o, Camera& cam)
-{
+void renderCase(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer, Object& o, glm::vec3& pos){
     o.position = pos;
     glm::mat4 m = o.getModelMatrix();
     glm::mat4 v = cam.getViewMatrix();
     glm::mat4 p = cam.getProjectionMatrix();
     glm::mat4 mvp = p*v*m;
-
-    return mvp;
+    shader.setUniformMat4f("MVP", mvp);
+    renderer.Draw(va, o, shader);
 }
-
 
 void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer) 
 {
         int nbCase = 8;
         int tailleCase = 2;
-        glm::mat4 mvp;
 
         for (int i=0; i<nbCase; i++){
             if (i%2==0){
                 for (int j=0; j<nbCase; j++){
-                    glm::vec3 pos(i*2, j*2, 0);
+                    glm::vec3 pos(i*tailleCase, j*tailleCase, 0);
                     if (j%2==0){
-                        
-                        mvp = mvpObject(pos, *caseBlack, cam);
-                        shader.setUniformMat4f("MVP", mvp);
-                        renderer.Draw(va, *caseBlack, shader);
+                        renderCase(va, cam, shader, renderer, *caseBlack, pos);
                     }
                     else{
-                        mvp = mvpObject(pos, *caseWhite, cam);
-                        shader.setUniformMat4f("MVP", mvp);
-                        renderer.Draw(va, *caseWhite, shader);
+                        renderCase(va, cam, shader, renderer, *caseWhite, pos);
                     }
                 }
             }
             else{
                 for (int j=0; j<nbCase; j++){
-                    glm::vec3 pos(i*2, j*2, 0);
+                    glm::vec3 pos(i*tailleCase, j*tailleCase, 0);
                     if (j%2==0){
-                        mvp = mvpObject(pos, *caseWhite, cam);
-                        shader.setUniformMat4f("MVP", mvp);
-                        renderer.Draw(va, *caseWhite, shader);
+                        renderCase(va, cam, shader, renderer, *caseWhite, pos);
                     }
                     else{
-                        mvp = mvpObject(pos, *caseBlack, cam);
-                        shader.setUniformMat4f("MVP", mvp);
-                        renderer.Draw(va, *caseBlack, shader);
+                        renderCase(va, cam, shader, renderer, *caseBlack, pos);
                     }
                 }
             }
