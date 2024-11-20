@@ -12,20 +12,8 @@
 #include "camera.h"
 #include "navigationcontrols.h"
 
-#include "loadModel.h"
-
 #include "plato.h"
 
-glm::mat4 mvpObject(glm::vec3 pos, Object& o, Camera& cam){
-
-    o.position = pos;
-    glm::mat4 m = o.getModelMatrix();
-    glm::mat4 v = cam.getViewMatrix();
-    glm::mat4 p = cam.getProjectionMatrix();
-    glm::mat4 mvp = p*v*m;
-
-    return mvp;
-}
 
 using namespace std;
 
@@ -105,30 +93,16 @@ int main()
 
 /////////////////////////Création des formes à afficher/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    std::vector<glm::vec3> verticesCase;
-	std::vector<glm::vec2> uvsCase;
-	std::vector<glm::vec3> normalsCase; // Won't be used at the moment.
-	bool resCase = loadOBJ("/home/vpech/Documents/Github/Chess-OpenGL/src/model/case.obj", verticesCase, uvsCase, normalsCase);
-    Object o(verticesCase, uvsCase, path+"/textures/caseNoire.png");
-    Object o2(verticesCase, uvsCase, path+"/textures/caseBlanche.png");
+    Plato pl;
 
-    // Plato p;
+    Object& o = *(pl.caseWhite);
+    Object& o2 = *(pl.caseBlack);
 
-    // Object o = p.caseWhite;
-    // Object o2 = p.caseBlack;
-    glm::mat4 mvp;
 
+  
 
 /////////////////////////Création de la matrice MVP/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // cam.computeMatrices(width, height);
-    // glm::mat4 m = o.getModelMatrix();
-    // glm::mat4 v = cam.getViewMatrix();
-    // glm::mat4 p = cam.getProjectionMatrix();
-
-    // glm::mat4 mvp = p*v*m;
-
-    // shader.setUniformMat4f("MVP", mvp);
 
 
 
@@ -162,57 +136,65 @@ int main()
         controls.update(deltaTime, &shader);
         cam.computeMatrices(width, height);
 
+        // glm::mat4 m = o.getModelMatrix();
+        // glm::mat4 v = cam.getViewMatrix();
+        // glm::mat4 p = cam.getProjectionMatrix();
+
+        // glm::mat4 mvp = p*v*m;
+
+        // shader.setUniformMat4f("MVP", mvp);
+
 
         ////////////////On commence par vider les buffers///////////////
         renderer.Clear();
         // renderer.Draw(va, o, shader);
 
     
-        // p.Draw(va, cam, shader, renderer);
+        pl.Draw(va, cam, shader, renderer);
 
         int nbCase = 8;
 
-        for (int i=0; i<nbCase; i++){
-            if (i%2==0){
-                for (int j=0; j<nbCase; j++){
-                    if (j%2==0){
-                        glm::vec3 pos(i*2, j*2, 0);
-                        mvp = mvpObject(pos, o, cam);
-                        shader.setUniformMat4f("MVP", mvp);
-                        renderer.Draw(va, o, shader);
-                        std::cout<<"Blanc ("<<i*2<<","<<j*2<<") ";
-                    }
-                    else{
-                        glm::vec3 pos(i*2, j*2, 0);
-                        mvp = mvpObject(pos, o2, cam);
-                        shader.setUniformMat4f("MVP", mvp);
-                        renderer.Draw(va, o2, shader);
-                        std::cout<<"Noir ("<<i*2<<","<<j*2<<") ";
-                    }
-                }
-                std::cout<<"\n";
-            }
-            else{
-                for (int j=0; j<nbCase; j++){
-                    if (j%2==0){
-                        glm::vec3 pos(i*2, j*2, 0);
-                        mvp = mvpObject(pos, o2, cam);
-                        shader.setUniformMat4f("MVP", mvp);
-                        renderer.Draw(va, o2, shader);
-                        std::cout<<"Noir ("<<i*2<<","<<j*2<<") ";
-                    }
-                    else{
-                        glm::vec3 pos(i*2, j*2, 0);
-                        mvp = mvpObject(pos, o, cam);
-                        shader.setUniformMat4f("MVP", mvp);
-                        renderer.Draw(va, o, shader);
-                        std::cout<<"Blanc ("<<i*2<<","<<j*2<<") ";
-                    }
-                }
-                std::cout<<"\n";
-            }
-        }
-        std::cout<<"-------------------------------------------\n";
+        // for (int i=0; i<nbCase; i++){
+        //     if (i%2==0){
+        //         for (int j=0; j<nbCase; j++){
+        //             if (j%2==0){
+        //                 glm::vec3 pos(i*2, j*2, 0);
+        //                 mvp = mvpObject(pos, o, cam);
+        //                 shader.setUniformMat4f("MVP", mvp);
+        //                 renderer.Draw(va, o, shader);
+        //                 std::cout<<"Blanc ("<<i*2<<","<<j*2<<") ";
+        //             }
+        //             else{
+        //                 glm::vec3 pos(i*2, j*2, 0);
+        //                 mvp = mvpObject(pos, o2, cam);
+        //                 shader.setUniformMat4f("MVP", mvp);
+        //                 renderer.Draw(va, o2, shader);
+        //                 std::cout<<"Noir ("<<i*2<<","<<j*2<<") ";
+        //             }
+        //         }
+        //         std::cout<<"\n";
+        //     }
+        //     else{
+        //         for (int j=0; j<nbCase; j++){
+        //             if (j%2==0){
+        //                 glm::vec3 pos(i*2, j*2, 0);
+        //                 mvp = mvpObject(pos, o2, cam);
+        //                 shader.setUniformMat4f("MVP", mvp);
+        //                 renderer.Draw(va, o2, shader);
+        //                 std::cout<<"Noir ("<<i*2<<","<<j*2<<") ";
+        //             }
+        //             else{
+        //                 glm::vec3 pos(i*2, j*2, 0);
+        //                 mvp = mvpObject(pos, o, cam);
+        //                 shader.setUniformMat4f("MVP", mvp);
+        //                 renderer.Draw(va, o, shader);
+        //                 std::cout<<"Blanc ("<<i*2<<","<<j*2<<") ";
+        //             }
+        //         }
+        //         std::cout<<"\n";
+        //     }
+        // }
+        // std::cout<<"-------------------------------------------\n";
 
         ////////////////Partie rafraichissement de l'image et des évènements///////////////
         //Swap buffers : frame refresh

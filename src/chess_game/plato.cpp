@@ -3,8 +3,7 @@
 #include "loadModel.h"
 
 
-Plato::Plato(): caseBlack(std::vector<glm::vec3>(), std::vector<glm::vec2>(), "")
-    , caseWhite(std::vector<glm::vec3>(), std::vector<glm::vec2>(), "")
+Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr)
 {
     std::string path = "/home/vpech/Documents/Github/Chess-OpenGL/src";
     std::vector<glm::vec3> verticesCase;
@@ -14,72 +13,74 @@ Plato::Plato(): caseBlack(std::vector<glm::vec3>(), std::vector<glm::vec2>(), ""
 
     if (resCase)
     {
-        caseBlack = Object(verticesCase, uvsCase, path + "/textures/caseNoire.png");
-        caseWhite = Object(verticesCase, uvsCase, path + "/textures/caseBlanche.png");
+        caseBlack = new Object(verticesCase, uvsCase, path + "/textures/caseNoire.png");
+        caseWhite = new Object(verticesCase, uvsCase, path + "/textures/caseWhite.png");
     }
     else
     {
         throw std::runtime_error("Impossible de charger le fichier OBJ de la case");
     }
+    std::cout<<"-----------------------------Good---------------------------------------------------------";
 }
 
 Plato::~Plato()
 {
-    
+    delete caseBlack;
+    delete caseWhite;
 }
 
-// glm::mat4 mvpObject(glm::vec3 pos, Object& o, Camera& cam){
+glm::mat4 mvpObject(glm::vec3 pos, Object& o, Camera& cam){
 
-//     o.position = pos;
-//     glm::mat4 m = o.getModelMatrix();
-//     glm::mat4 v = cam.getViewMatrix();
-//     glm::mat4 p = cam.getProjectionMatrix();
-//     glm::mat4 mvp = p*v*m;
+    o.position = pos;
+    glm::mat4 m = o.getModelMatrix();
+    glm::mat4 v = cam.getViewMatrix();
+    glm::mat4 p = cam.getProjectionMatrix();
+    glm::mat4 mvp = p*v*m;
 
-//     return mvp;
-// }
+    return mvp;
+}
 
 
 void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer) 
 {
-        // int nbCase = 8;
-        // int tailleCase = 2;
-        // glm::mat4 mvp;
+        int nbCase = 8;
+        int tailleCase = 2;
+        glm::mat4 mvp;
 
-        // std::cout<<"Blanc";
+        std::cout<<"Blanc";
 
-        // for (int i=0; i<nbCase; i++){
-        //     if (i%2==0){
-        //         for (int j=0; j<nbCase; j++){
-        //             glm::vec3 pos(i*2, j*2, 0);
-        //             if (j%2==0){
+        for (int i=0; i<nbCase; i++){
+            if (i%2==0){
+                for (int j=0; j<nbCase; j++){
+                    glm::vec3 pos(i*2, j*2, 0);
+                    if (j%2==0){
                         
-        //                 mvp = mvpObject(pos, caseBlack, cam);
-        //                 shader.setUniformMat4f("MVP", mvp);
-        //                 renderer.Draw(va, caseBlack, shader);
-        //             }
-        //             else{
-        //                 mvp = mvpObject(pos, caseWhite, cam);
-        //                 shader.setUniformMat4f("MVP", mvp);
-        //                 renderer.Draw(va, caseWhite, shader);
-        //                 std::cout<<"Blanc ("<<i*2<<","<<j*2<<") ";
-        //             }
-        //         }
-        //     }
-        //     else{
-        //         for (int j=0; j<nbCase; j++){
-        //             glm::vec3 pos(i*2, j*2, 0);
-        //             if (j%2==0){
-        //                 mvp = mvpObject(pos, caseWhite, cam);
-        //                 shader.setUniformMat4f("MVP", mvp);
-        //                 renderer.Draw(va, caseWhite, shader);
-        //             }
-        //             else{
-        //                 mvp = mvpObject(pos, caseBlack, cam);
-        //                 shader.setUniformMat4f("MVP", mvp);
-        //                 renderer.Draw(va, caseBlack, shader);
-        //             }
-        //         }
-        //     }
-        // }
+                        mvp = mvpObject(pos, *caseBlack, cam);
+                        shader.setUniformMat4f("MVP", mvp);
+                        renderer.Draw(va, *caseBlack, shader);
+                    }
+                    else{
+                        mvp = mvpObject(pos, *caseWhite, cam);
+                        shader.setUniformMat4f("MVP", mvp);
+                        renderer.Draw(va, *caseWhite, shader);
+                        std::cout<<"Blanc ("<<i*2<<","<<j*2<<") ";
+                    }
+                }
+            }
+            else{
+                for (int j=0; j<nbCase; j++){
+                    glm::vec3 pos(i*2, j*2, 0);
+                    if (j%2==0){
+                        mvp = mvpObject(pos, *caseWhite, cam);
+                        shader.setUniformMat4f("MVP", mvp);
+                        renderer.Draw(va, *caseWhite, shader);
+                    }
+                    else{
+                        mvp = mvpObject(pos, *caseBlack, cam);
+                        shader.setUniformMat4f("MVP", mvp);
+                        renderer.Draw(va, *caseBlack, shader);
+                    }
+                }
+            }
+        }
 }
