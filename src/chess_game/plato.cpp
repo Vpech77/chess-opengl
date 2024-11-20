@@ -11,16 +11,13 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr)
 	std::vector<glm::vec3> normalsCase; // Won't be used at the moment.
 	bool resCase = loadOBJ("/home/vpech/Documents/Github/Chess-OpenGL/src/model/case.obj", verticesCase, uvsCase, normalsCase);
 
-    if (resCase)
-    {
+    if(resCase){
         caseBlack = new Object(verticesCase, uvsCase, path + "/textures/caseNoire.png");
         caseWhite = new Object(verticesCase, uvsCase, path + "/textures/caseWhite.png");
     }
-    else
-    {
+    else{
         throw std::runtime_error("Impossible de charger le fichier OBJ de la case");
     }
-    std::cout<<"-----------------------------Good---------------------------------------------------------";
 }
 
 Plato::~Plato()
@@ -29,8 +26,8 @@ Plato::~Plato()
     delete caseWhite;
 }
 
-glm::mat4 mvpObject(glm::vec3 pos, Object& o, Camera& cam){
-
+glm::mat4 mvpObject(glm::vec3 pos, Object& o, Camera& cam)
+{
     o.position = pos;
     glm::mat4 m = o.getModelMatrix();
     glm::mat4 v = cam.getViewMatrix();
@@ -47,8 +44,6 @@ void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& rendere
         int tailleCase = 2;
         glm::mat4 mvp;
 
-        std::cout<<"Blanc";
-
         for (int i=0; i<nbCase; i++){
             if (i%2==0){
                 for (int j=0; j<nbCase; j++){
@@ -63,7 +58,6 @@ void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& rendere
                         mvp = mvpObject(pos, *caseWhite, cam);
                         shader.setUniformMat4f("MVP", mvp);
                         renderer.Draw(va, *caseWhite, shader);
-                        std::cout<<"Blanc ("<<i*2<<","<<j*2<<") ";
                     }
                 }
             }
