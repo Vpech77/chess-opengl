@@ -10,7 +10,8 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr)
     std::vector<glm::vec3> verticesCase;
 	std::vector<glm::vec2> uvsCase;
 	std::vector<glm::vec3> normalsCase; // Won't be used at the moment.
-	bool resCase = loadOBJ("/home/vpech/Documents/Github/Chess-OpenGL/src/model/case.obj", verticesCase, uvsCase, normalsCase);
+    std::string pathOBJ = path + "/model/case.obj";
+	bool resCase = loadOBJ(pathOBJ.c_str(), verticesCase, uvsCase, normalsCase);
 
     if(resCase){
         caseBlack = new Object(verticesCase, uvsCase, path + "/textures/caseNoire.png");
