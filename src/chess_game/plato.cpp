@@ -1,11 +1,12 @@
 #include "plato.h"
+#include <filesystem>
 #include <iostream>
 #include "loadModel.h"
 
 
 Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr)
 {
-    std::string path = "/home/vpech/Documents/Github/Chess-OpenGL/src";
+    std::string path = std::filesystem::absolute("../src");
     std::vector<glm::vec3> verticesCase;
 	std::vector<glm::vec2> uvsCase;
 	std::vector<glm::vec3> normalsCase; // Won't be used at the moment.
@@ -13,7 +14,7 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr)
 
     if(resCase){
         caseBlack = new Object(verticesCase, uvsCase, path + "/textures/caseNoire.png");
-        caseWhite = new Object(verticesCase, uvsCase, path + "/textures/caseWhite.png");
+        caseWhite = new Object(verticesCase, uvsCase, path + "/textures/caseBlanche.png");
     }
     else{
         throw std::runtime_error("Impossible de charger le fichier OBJ de la case");

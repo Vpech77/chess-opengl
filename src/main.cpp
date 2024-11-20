@@ -1,3 +1,4 @@
+#include <filesystem>
 #include <iostream>
 
 #include <GL/glew.h>
@@ -14,8 +15,6 @@
 
 #include "plato.h"
 
-
-using namespace std;
 
 int main()
 {
@@ -65,8 +64,7 @@ int main()
     }
 
     /************************** INITIALISATION DES PARAMETRES ***************************/
-
-    string path = "/home/vpech/Documents/Github/Chess-OpenGL/src";
+    std::string path = std::filesystem::absolute("../src");
 
     Renderer renderer;
     Shader shader(path+"/shaders/SimpleVertexShader.vertexshader", path+"/shaders/SimpleFragmentShader.fragmentshader");
