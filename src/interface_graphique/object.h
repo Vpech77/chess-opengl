@@ -14,6 +14,7 @@ class Object
 {
 public:
     Object(std::vector< glm::vec3 > vertices, std::vector< glm::vec2 > uvs, std::string texturePath);
+    Object(const char * objPath, std::string texturePath);
     ~Object();
     void Bind() const;
     void Unbind() const;
@@ -26,6 +27,7 @@ private:
     VertexBuffer *m_vb;
     UVBuffer *m_uvsb;
     Texture *m_texture;
+    bool loadOBJ(const char * path, std::vector<glm::vec3>& vertices, std::vector<glm::vec2>& uvs);
 
 
 };
