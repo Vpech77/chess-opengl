@@ -1,6 +1,7 @@
 #include "plato.h"
 #include <filesystem>
 #include <iostream>
+#include <object.h>
 #include "loadModel.h"
 
 
@@ -10,15 +11,10 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr)
     std::vector<glm::vec3> verticesCase;
 	std::vector<glm::vec2> uvsCase;
     std::string pathOBJ = path + "/model/case.obj";
-	bool resCase = loadOBJ(pathOBJ.c_str(), verticesCase, uvsCase);
 
-    if(resCase){
-        caseBlack = new Object(verticesCase, uvsCase, path + "/textures/caseNoire.png");
-        caseWhite = new Object(verticesCase, uvsCase, path + "/textures/caseBlanche.png");
-    }
-    else{
-        throw std::runtime_error("Impossible de charger le fichier OBJ de la case");
-    }
+    caseBlack = new Object(pathOBJ.c_str(), path + "/textures/caseNoire.png");
+    caseWhite = new Object(pathOBJ.c_str(), path + "/textures/caseBlanche.png");
+
 }
 
 Plato::~Plato()
@@ -27,7 +23,7 @@ Plato::~Plato()
     delete caseWhite;
 }
 
-void renderCase(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer, Object& o, glm::vec3& pos){
+void Plato::renderCase(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer, Object& o, glm::vec3& pos){
     o.position = pos;
     glm::mat4 m = o.getModelMatrix();
     glm::mat4 v = cam.getViewMatrix();

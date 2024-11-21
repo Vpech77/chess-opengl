@@ -12,7 +12,7 @@
 class Plato
 {
     private:
-        
+        void renderCase(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer, Object& o, glm::vec3& pos);
         
     public:
         Plato();
