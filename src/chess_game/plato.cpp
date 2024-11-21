@@ -2,8 +2,6 @@
 #include <filesystem>
 #include <iostream>
 #include <object.h>
-#include "loadModel.h"
-
 
 Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr)
 {
