@@ -75,9 +75,6 @@ int main()
     VertexArray va;
     va.Bind();
 
-    VertexArray va2;
-    va2.Bind();
-
 
     Camera cam(width, height);
     NavigationControls controls(window, &cam);
@@ -137,7 +134,7 @@ int main()
         }
 
         for (int i = 0; i < 8; i++) {
-            pawnsWhite.at(i)->Draw(va2, cam, shader, renderer);
+            pawnsWhite.at(i)->Draw(va, cam, shader, renderer);
         }
 
 
