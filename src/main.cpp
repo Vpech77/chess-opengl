@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include "glm/glm.hpp"
 #include <vector>
+#include <map>
 
 #include "vertexbuffer.h"
 #include "vertexarray.h"
@@ -14,6 +15,8 @@
 #include "navigationcontrols.h"
 
 #include "plato.h"
+#include "piece.h"
+
 
 
 int main()
@@ -72,9 +75,32 @@ int main()
     VertexArray va;
     va.Bind();
 
+    VertexArray va2;
+    va2.Bind();
+
+
     Camera cam(width, height);
     NavigationControls controls(window, &cam);
     Plato board;
+
+    std::string pathOBJ = path + "/model/pawn.obj";
+
+
+    Object piece(pathOBJ.c_str(), path + "/textures/noir.png");
+
+ 
+    std::vector<Piece*> pawnsBlack;
+
+    for (int i = 0; i < 8; i++) {
+        pawnsBlack.push_back(new Piece(i*2, 2));
+    }
+
+    std::vector<Piece*> pawnsWhite;
+
+    for (int i = 0; i < 8; i++) {
+        pawnsWhite.push_back(new Piece(i*2, 6*2));
+    }
+
 
     /************************** BOUCLE DE RENDU ***************************/
   
@@ -104,6 +130,16 @@ int main()
         renderer.Clear();
 
         board.Draw(va, cam, shader, renderer);
+
+
+        for (int i = 0; i < 8; i++) {
+            pawnsBlack.at(i)->Draw(va, cam, shader, renderer);
+        }
+
+        for (int i = 0; i < 8; i++) {
+            pawnsWhite.at(i)->Draw(va2, cam, shader, renderer);
+        }
+
 
         ////////////////Partie rafraichissement de l'image et des évènements///////////////
         //Swap buffers : frame refresh
