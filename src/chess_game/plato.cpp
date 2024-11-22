@@ -2,8 +2,9 @@
 #include <filesystem>
 #include <iostream>
 #include <object.h>
+#include "pawn.h"
 
-Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr)
+Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr), p()
 {
     std::string path = std::filesystem::absolute("../src");
     std::vector<glm::vec3> verticesCase;
@@ -13,12 +14,21 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr)
     caseBlack = new Object(pathOBJ.c_str(), path + "/textures/caseNoire.png");
     caseWhite = new Object(pathOBJ.c_str(), path + "/textures/caseBlanche.png");
 
+    p.push_back(new Pawn("white"));
+    p.push_back(new Pawn("black"));
+    
+
+
 }
 
 Plato::~Plato()
 {
     delete caseBlack;
     delete caseWhite;
+    for (Piece* piece : p){
+        delete piece; 
+    }
+    p.clear();
 }
 
 void Plato::renderCase(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer, Object& o, glm::vec3& pos){
@@ -35,6 +45,14 @@ void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& rendere
 {
         int nbCase = 8;
         int tailleCase = 2;
+
+        for (int i = 0; i < 8; i++) {
+            glm::vec3 posPawnWhite(i*tailleCase, 2, 0);
+            renderCase(va, cam, shader, renderer, *(p.at(0)->oPiece), posPawnWhite);
+            glm::vec3 posPawnBlack(i*tailleCase, 6*tailleCase, 0);
+            renderCase(va, cam, shader, renderer, *(p.at(1)->oPiece), posPawnBlack);
+        }
+
 
         for (int i=0; i<nbCase; i++){
             if (i%2==0){

@@ -7,7 +7,10 @@
 #include <vertexarray.h>
 #include <camera.h>
 #include <renderer.h>
+#include <vector>
 #include "object.h"
+#include "piece.h"
+
 
 class Plato
 {
@@ -20,6 +23,7 @@ class Plato
         void Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer);
         Object* caseBlack;
         Object* caseWhite;
+        std::vector<Piece*> p;
         
 
 };

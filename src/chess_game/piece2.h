@@ -13,12 +13,13 @@
 class Piece
 {
     public:
-        Piece(std::string m_color);
-        virtual ~Piece();
-        std::string color;
+        Piece(int x, int y);
+        ~Piece();
         Object* oPiece;
-        virtual void move(int x, int y) = 0;
         void Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer);
+        int m_x;
+        int m_y;
+    
 };
 
 #endif

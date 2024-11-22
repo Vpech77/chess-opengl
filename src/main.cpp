@@ -83,20 +83,20 @@ int main()
     std::string pathOBJ = path + "/model/pawn.obj";
 
 
-    Object piece(pathOBJ.c_str(), path + "/textures/noir.png");
+    // Object piece(pathOBJ.c_str(), path + "/textures/noir.png");
 
  
-    std::vector<Piece*> pawnsBlack;
+    // std::vector<Piece*> pawnsBlack;
 
-    for (int i = 0; i < 8; i++) {
-        pawnsBlack.push_back(new Piece(i*2, 2));
-    }
+    // for (int i = 0; i < 8; i++) {
+    //     pawnsBlack.push_back(new Piece(i*2, 2));
+    // }
 
-    std::vector<Piece*> pawnsWhite;
+    // std::vector<Piece*> pawnsWhite;
 
-    for (int i = 0; i < 8; i++) {
-        pawnsWhite.push_back(new Piece(i*2, 6*2));
-    }
+    // for (int i = 0; i < 8; i++) {
+    //     pawnsWhite.push_back(new Piece(i*2, 6*2));
+    // }
 
 
     /************************** BOUCLE DE RENDU ***************************/
@@ -129,13 +129,13 @@ int main()
         board.Draw(va, cam, shader, renderer);
 
 
-        for (int i = 0; i < 8; i++) {
-            pawnsBlack.at(i)->Draw(va, cam, shader, renderer);
-        }
+        // for (int i = 0; i < 8; i++) {
+        //     pawnsBlack.at(i)->Draw(va, cam, shader, renderer);
+        // }
 
-        for (int i = 0; i < 8; i++) {
-            pawnsWhite.at(i)->Draw(va, cam, shader, renderer);
-        }
+        // for (int i = 0; i < 8; i++) {
+        //     pawnsWhite.at(i)->Draw(va, cam, shader, renderer);
+        // }
 
 
         ////////////////Partie rafraichissement de l'image et des évènements///////////////
