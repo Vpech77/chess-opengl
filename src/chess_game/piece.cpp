@@ -15,3 +15,15 @@ TypePiece Piece::getType(){
 void Piece::setType(TypePiece typ){
     m_typ = typ;
 }
+
+glm::vec2 Piece::getCoord(){
+    return m_coord;
+}
+
+std::string Piece::getColor(){
+    return m_color;
+}
+
+void Piece::move(glm::vec2& newCoord){
+    m_coord = newCoord;
+}
