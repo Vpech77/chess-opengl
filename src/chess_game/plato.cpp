@@ -17,7 +17,16 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr), p()
 
     p.push_back(createPiece3D("white", "pawn"));
     p.push_back(createPiece3D("black", "pawn"));
-
+    p.push_back(createPiece3D("white", "rook"));
+    p.push_back(createPiece3D("black", "rook"));
+    p.push_back(createPiece3D("white", "knight"));
+    p.push_back(createPiece3D("black", "knight"));
+    p.push_back(createPiece3D("white", "bishop"));
+    p.push_back(createPiece3D("black", "bishop"));
+    p.push_back(createPiece3D("white", "king"));
+    p.push_back(createPiece3D("black", "king"));
+    p.push_back(createPiece3D("white", "queen"));
+    p.push_back(createPiece3D("black", "queen"));
 
     initArray();
 }
@@ -37,8 +46,29 @@ void Plato::initArray(){
             }
         }
     }
-}
 
+    int liWhite = 0;
+    array[0][liWhite] = new Rook  ("white", glm::vec2(0, liWhite));
+    array[1][liWhite] = new Knight("white", glm::vec2(1, liWhite));
+    array[2][liWhite] = new Bishop("white", glm::vec2(2, liWhite));
+    array[3][liWhite] = new Queen ("white", glm::vec2(3, liWhite));
+    array[4][liWhite] = new King  ("white", glm::vec2(4, liWhite));
+    array[5][liWhite] = new Bishop("white", glm::vec2(5, liWhite));
+    array[6][liWhite] = new Knight("white", glm::vec2(6, liWhite));
+    array[7][liWhite] = new Rook  ("white", glm::vec2(7, liWhite));
+
+    int liBlack = 7;
+    array[0][liBlack] = new Rook  ("black", glm::vec2(0, liBlack));
+    array[1][liBlack] = new Knight("black", glm::vec2(1, liBlack));
+    array[2][liBlack] = new Bishop("black", glm::vec2(2, liBlack));
+    array[3][liBlack] = new King  ("black", glm::vec2(3, liBlack));
+    array[4][liBlack] = new Queen ("black", glm::vec2(4, liBlack));
+    array[5][liBlack] = new Bishop("black", glm::vec2(5, liBlack));
+    array[6][liBlack] = new Knight("black", glm::vec2(6, liBlack));
+    array[7][liBlack] = new Rook  ("black", glm::vec2(7, liBlack));
+    
+
+}
 
 
 Object* Plato::createPiece3D(std::string color, std::string typ){
@@ -82,13 +112,6 @@ void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& rendere
     int nbCase = 8;
     int tailleCase = 2;
 
-    // for (int i = 0; i < 8; i++) {
-    //     glm::vec3 posPawnWhite(i*tailleCase, 2, 0);
-    //     renderCase(va, cam, shader, renderer, *p.at(0), posPawnWhite);
-    //     glm::vec3 posPawnBlack(i*tailleCase, 6*tailleCase, 0);
-    //     renderCase(va, cam, shader, renderer, *p.at(1), posPawnBlack);
-    // }
-
     for (int i=0; i<nbCase; i++){
         for (int j=0; j<nbCase; j++){
             if(array[i][j]){
@@ -105,11 +128,9 @@ void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& rendere
                 glm::vec3 pos(i*tailleCase, j*tailleCase, 0);
                 if (j%2==0){
                     renderCase(va, cam, shader, renderer, *caseBlack, pos);
-                    std::cout<<" N : ("<<i*tailleCase<<","<<j*tailleCase<<")";
                 }
                 else{
                     renderCase(va, cam, shader, renderer, *caseWhite, pos);
-                    std::cout<<" B : ("<<i*tailleCase<<","<<j*tailleCase<<")";
                 }
             }
             std::cout<<"\n";
@@ -119,15 +140,11 @@ void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& rendere
                 glm::vec3 pos(i*tailleCase, j*tailleCase, 0);
                 if (j%2==0){
                     renderCase(va, cam, shader, renderer, *caseWhite, pos);
-                    std::cout<<" B : ("<<i*tailleCase<<","<<j*tailleCase<<")";
                 }
                 else{
                     renderCase(va, cam, shader, renderer, *caseBlack, pos);
-                    std::cout<<" N : ("<<i*tailleCase<<","<<j*tailleCase<<")";
                 }
             }
-            std::cout<<"\n";
         }
     }
-    std::cout<<"------------------------------\n";
 }
