@@ -63,6 +63,10 @@ void Object::Unbind() const
     if (m_texture) m_texture->Unbind();
 }
 
+void Object::setRotation(glm::vec3 rot){
+	rotationAngles = rot;
+}
+
 void Object::Draw() const
 {
     GLCall(glDrawArrays(GL_TRIANGLES,0, m_vb->getSize()));

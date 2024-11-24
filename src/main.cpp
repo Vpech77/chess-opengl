@@ -72,6 +72,7 @@ int main()
     VertexArray va;
     va.Bind();
 
+
     Camera cam(width, height);
     NavigationControls controls(window, &cam);
     Plato board;
@@ -104,6 +105,7 @@ int main()
         renderer.Clear();
 
         board.Draw(va, cam, shader, renderer);
+
 
         ////////////////Partie rafraichissement de l'image et des évènements///////////////
         //Swap buffers : frame refresh
