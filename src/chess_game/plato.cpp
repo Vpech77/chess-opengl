@@ -3,6 +3,8 @@
 #include <iostream>
 #include <object.h>
 
+#include "headerPieces.h"
+
 Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr), p()
 {
     std::string path = std::filesystem::absolute("../src");
@@ -15,7 +17,29 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr), p()
 
     p.push_back(createPiece3D("white", "pawn"));
     p.push_back(createPiece3D("black", "pawn"));
+
+
+    initArray();
 }
+
+void Plato::initArray(){
+    for (int col = 0; col < 8; ++col){
+        for (int li = 0; li < 8; ++li){
+            glm::vec2 pos(col, li);
+            if (li == 1){
+                array[col][li] = new Pawn("white", pos);
+            }
+            else if (li == 6){
+                array[col][li] = new Pawn("black", pos);
+            }
+            else{
+                array[col][li] = nullptr;
+            }
+        }
+    }
+}
+
+
 
 Object* Plato::createPiece3D(std::string color, std::string typ){
     std::string path = std::filesystem::absolute("../src");
@@ -35,6 +59,12 @@ Plato::~Plato()
         delete piece; 
     }
     p.clear();
+
+    for (int i = 0; i < 8; ++i){
+        for (int j = 0; j < 8; ++j){
+            delete array[i][j];
+        }
+    }
 }
 
 void Plato::renderCase(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer, Object& o, glm::vec3& pos){
@@ -52,11 +82,20 @@ void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& rendere
     int nbCase = 8;
     int tailleCase = 2;
 
-    for (int i = 0; i < 8; i++) {
-        glm::vec3 posPawnWhite(i*tailleCase, 2, 0);
-        renderCase(va, cam, shader, renderer, *p.at(0), posPawnWhite);
-        glm::vec3 posPawnBlack(i*tailleCase, 6*tailleCase, 0);
-        renderCase(va, cam, shader, renderer, *p.at(1), posPawnBlack);
+    // for (int i = 0; i < 8; i++) {
+    //     glm::vec3 posPawnWhite(i*tailleCase, 2, 0);
+    //     renderCase(va, cam, shader, renderer, *p.at(0), posPawnWhite);
+    //     glm::vec3 posPawnBlack(i*tailleCase, 6*tailleCase, 0);
+    //     renderCase(va, cam, shader, renderer, *p.at(1), posPawnBlack);
+    // }
+
+    for (int i=0; i<nbCase; i++){
+        for (int j=0; j<nbCase; j++){
+            if(array[i][j]){
+                glm::vec3 pos(i*tailleCase, j*tailleCase, 0);
+                renderCase(va, cam, shader, renderer, *p.at(array[i][j]->getType()), pos);
+            }
+        }
     }
 
 

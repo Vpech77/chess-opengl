@@ -1,4 +1,4 @@
 #include "king.h"
 
-King::King(std::string color, glm::vec2 coord): Piece(color, "king", coord){}
+King::King(std::string color, glm::vec2 coord): Piece(color, coord){}
 
