@@ -77,8 +77,6 @@ int main()
     NavigationControls controls(window, &cam);
     Plato board;
 
-
-
     /************************** BOUCLE DE RENDU ***************************/
   
     // Assure que l'on peut capturer les touche de clavier

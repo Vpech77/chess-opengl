@@ -28,6 +28,8 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr), p()
     p.push_back(createPiece3D("white", "queen"));
     p.push_back(createPiece3D("black", "queen"));
 
+    p.at(TypePiece::BLACK_KNIGHT)->setRotation(glm::vec3(0,0,3.14));
+
     initArray();
 }
 
@@ -121,7 +123,6 @@ void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& rendere
         }
     }
 
-
     for (int i=0; i<nbCase; i++){
         if (i%2==0){
             for (int j=0; j<nbCase; j++){
@@ -133,7 +134,6 @@ void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& rendere
                     renderCase(va, cam, shader, renderer, *caseWhite, pos);
                 }
             }
-            std::cout<<"\n";
         }
         else{
             for (int j=0; j<nbCase; j++){

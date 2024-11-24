@@ -22,6 +22,7 @@ public:
     glm::vec3 position;
     glm::vec3 rotationAngles;
     glm::mat4 getModelMatrix();
+    void setRotation(glm::vec3 rot);
 
 private:
     VertexBuffer *m_vb;
