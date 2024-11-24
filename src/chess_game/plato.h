@@ -18,6 +18,7 @@ class Plato
     public:
         Plato();
         ~Plato();
+        
         void Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer);
         Object* caseBlack;
         Object* caseWhite;

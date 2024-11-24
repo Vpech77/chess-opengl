@@ -49,39 +49,46 @@ void Plato::renderCase(VertexArray& va, Camera& cam, Shader& shader, Renderer& r
 
 void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer) 
 {
-        int nbCase = 8;
-        int tailleCase = 2;
+    int nbCase = 8;
+    int tailleCase = 2;
 
-        for (int i = 0; i < 8; i++) {
-            glm::vec3 posPawnWhite(i*tailleCase, 2, 0);
-            renderCase(va, cam, shader, renderer, *p.at(0), posPawnWhite);
-            glm::vec3 posPawnBlack(i*tailleCase, 6*tailleCase, 0);
-            renderCase(va, cam, shader, renderer, *p.at(1), posPawnBlack);
-        }
+    for (int i = 0; i < 8; i++) {
+        glm::vec3 posPawnWhite(i*tailleCase, 2, 0);
+        renderCase(va, cam, shader, renderer, *p.at(0), posPawnWhite);
+        glm::vec3 posPawnBlack(i*tailleCase, 6*tailleCase, 0);
+        renderCase(va, cam, shader, renderer, *p.at(1), posPawnBlack);
+    }
 
 
-        for (int i=0; i<nbCase; i++){
-            if (i%2==0){
-                for (int j=0; j<nbCase; j++){
-                    glm::vec3 pos(i*tailleCase, j*tailleCase, 0);
-                    if (j%2==0){
-                        renderCase(va, cam, shader, renderer, *caseBlack, pos);
-                    }
-                    else{
-                        renderCase(va, cam, shader, renderer, *caseWhite, pos);
-                    }
+    for (int i=0; i<nbCase; i++){
+        if (i%2==0){
+            for (int j=0; j<nbCase; j++){
+                glm::vec3 pos(i*tailleCase, j*tailleCase, 0);
+                if (j%2==0){
+                    renderCase(va, cam, shader, renderer, *caseBlack, pos);
+                    std::cout<<" N : ("<<i*tailleCase<<","<<j*tailleCase<<")";
+                }
+                else{
+                    renderCase(va, cam, shader, renderer, *caseWhite, pos);
+                    std::cout<<" B : ("<<i*tailleCase<<","<<j*tailleCase<<")";
                 }
             }
-            else{
-                for (int j=0; j<nbCase; j++){
-                    glm::vec3 pos(i*tailleCase, j*tailleCase, 0);
-                    if (j%2==0){
-                        renderCase(va, cam, shader, renderer, *caseWhite, pos);
-                    }
-                    else{
-                        renderCase(va, cam, shader, renderer, *caseBlack, pos);
-                    }
+            std::cout<<"\n";
+        }
+        else{
+            for (int j=0; j<nbCase; j++){
+                glm::vec3 pos(i*tailleCase, j*tailleCase, 0);
+                if (j%2==0){
+                    renderCase(va, cam, shader, renderer, *caseWhite, pos);
+                    std::cout<<" B : ("<<i*tailleCase<<","<<j*tailleCase<<")";
+                }
+                else{
+                    renderCase(va, cam, shader, renderer, *caseBlack, pos);
+                    std::cout<<" N : ("<<i*tailleCase<<","<<j*tailleCase<<")";
                 }
             }
+            std::cout<<"\n";
         }
+    }
+    std::cout<<"------------------------------\n";
 }
