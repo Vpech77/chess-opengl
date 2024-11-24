@@ -1,5 +1,5 @@
-#ifndef PAWN_H
-#define PAWN_H
+#ifndef PAWN3D_H
+#define PAWN3D_H
 
 #include "glm/glm.hpp"
 #include "glm/gtx/transform.hpp"
@@ -9,14 +9,14 @@
 #include <renderer.h>
 #include <object.h>
 
-#include "piece.h"
+#include "piece3D.h"
 
 
-class Pawn : public Piece
+class Pawn3D : public Piece3D
 {
     public:
-        Pawn(std::string m_color);
-        void move(int x, int y) override;
+        Pawn3D(std::string m_color);
+
 };
 
 #endif

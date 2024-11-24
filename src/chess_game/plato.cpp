@@ -2,7 +2,6 @@
 #include <filesystem>
 #include <iostream>
 #include <object.h>
-#include "pawn.h"
 
 Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr), p()
 {
@@ -14,8 +13,8 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr), p()
     caseBlack = new Object(pathOBJ.c_str(), path + "/textures/caseNoire.png");
     caseWhite = new Object(pathOBJ.c_str(), path + "/textures/caseBlanche.png");
 
-    p.push_back(new Pawn("white"));
-    p.push_back(new Pawn("black"));
+    p.push_back(new Pawn3D("white"));
+    p.push_back(new Pawn3D("black"));
     
 
 
@@ -25,7 +24,7 @@ Plato::~Plato()
 {
     delete caseBlack;
     delete caseWhite;
-    for (Piece* piece : p){
+    for (Piece3D* piece : p){
         delete piece; 
     }
     p.clear();

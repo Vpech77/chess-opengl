@@ -1,17 +1,17 @@
-#include "piece.h"
+#include "piece3D.h"
 
 
-Piece::Piece(std::string m_color): oPiece(nullptr), color(m_color)
+Piece3D::Piece3D(std::string m_color): oPiece(nullptr), color(m_color)
 {
 
 }
 
-Piece::~Piece()
+Piece3D::~Piece3D()
 {
     delete oPiece;
 }
 
-void Piece::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer) 
+void Piece3D::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer) 
 {
     if (oPiece != nullptr) { 
         glm::mat4 m = oPiece->getModelMatrix();

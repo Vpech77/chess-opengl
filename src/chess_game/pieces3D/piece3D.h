@@ -1,5 +1,5 @@
-#ifndef PIECE_H
-#define PIECE_H
+#ifndef PIECE3D_H
+#define PIECE3D_H
 
 #include "glm/glm.hpp"
 #include "glm/gtx/transform.hpp"
@@ -9,17 +9,14 @@
 #include <renderer.h>
 #include <object.h>
 
-
-class Piece
+class Piece3D
 {
     public:
-        Piece(int x, int y);
-        ~Piece();
+        Piece3D(std::string m_color);
+        virtual ~Piece3D();
+        std::string color;
         Object* oPiece;
         void Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer);
-        int m_x;
-        int m_y;
-    
 };
 
 #endif
