@@ -13,18 +13,25 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr), p()
     caseBlack = new Object(pathOBJ.c_str(), path + "/textures/caseNoire.png");
     caseWhite = new Object(pathOBJ.c_str(), path + "/textures/caseBlanche.png");
 
-    p.push_back(new Pawn3D("white"));
-    p.push_back(new Pawn3D("black"));
-    
-
-
+    p.push_back(createPiece3D("white", "pawn"));
+    p.push_back(createPiece3D("black", "pawn"));
 }
+
+Object* Plato::createPiece3D(std::string color, std::string typ){
+    std::string path = std::filesystem::absolute("../src");
+    std::vector<glm::vec3> verticesCase;
+	std::vector<glm::vec2> uvsCase;
+    std::string pathOBJ = path + "/model/"+ typ +".obj";
+
+    return new Object(pathOBJ.c_str(), path + "/textures/"+color+".png");
+}
+
 
 Plato::~Plato()
 {
     delete caseBlack;
     delete caseWhite;
-    for (Piece3D* piece : p){
+    for (Object* piece : p){
         delete piece; 
     }
     p.clear();
@@ -47,9 +54,9 @@ void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& rendere
 
         for (int i = 0; i < 8; i++) {
             glm::vec3 posPawnWhite(i*tailleCase, 2, 0);
-            renderCase(va, cam, shader, renderer, *(p.at(0)->oPiece), posPawnWhite);
+            renderCase(va, cam, shader, renderer, *p.at(0), posPawnWhite);
             glm::vec3 posPawnBlack(i*tailleCase, 6*tailleCase, 0);
-            renderCase(va, cam, shader, renderer, *(p.at(1)->oPiece), posPawnBlack);
+            renderCase(va, cam, shader, renderer, *p.at(1), posPawnBlack);
         }
 
 

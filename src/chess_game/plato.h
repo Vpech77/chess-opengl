@@ -9,8 +9,6 @@
 #include <renderer.h>
 #include <vector>
 #include "object.h"
-#include "pieces3D/header3D.h"
-
 
 class Plato
 {
@@ -23,7 +21,8 @@ class Plato
         void Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& renderer);
         Object* caseBlack;
         Object* caseWhite;
-        std::vector<Piece3D*> p;
+        std::vector<Object*> p;
+        Object* createPiece3D(std::string color, std::string typ);
         
 
 };
