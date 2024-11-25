@@ -40,8 +40,8 @@ int main()
     int height=600;
 
     //On récupère les dimensions de l'écran pour créer la fenètre
-    GLFWmonitor* primary = glfwGetPrimaryMonitor();
-    glfwGetMonitorWorkarea(primary,nullptr,nullptr, &width, &height);
+    // GLFWmonitor* primary = glfwGetPrimaryMonitor();
+    // glfwGetMonitorWorkarea(primary,nullptr,nullptr, &width, &height);
 
     //Enfin on crée la fenêtre
     GLFWwindow* window = glfwCreateWindow(width,height,"OpenGL_API",NULL,NULL);
@@ -92,6 +92,8 @@ int main()
     float lastTime = glfwGetTime();
     float currentTime, deltaTime;
 
+    bool pause = true;
+
     while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && !glfwWindowShouldClose(window)){
 
         currentTime = glfwGetTime();
@@ -101,18 +103,69 @@ int main()
         controls.update(deltaTime, &shader);
         cam.computeMatrices(width, height);
 
-        //////////////// AFFICHAGE DES OBJETS ///////////////
         renderer.Clear();
 
-        board.Draw(va, cam, shader, renderer);
+        if (pause){
+            board.Draw(va, cam, shader, renderer);
+        }
 
 
         ////////////////Partie rafraichissement de l'image et des évènements///////////////
         //Swap buffers : frame refresh
         glfwSwapBuffers(window);
+
         //get the events
         glfwPollEvents();
+
+
+        if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+            pause = !pause;
+            std::cout<<"------------stop-------------\n";
+            
+
+            int nbCase = 8;
+            int tailleCase = 2;
+
+            for (int i=0; i<nbCase; i++){
+                for (int j=0; j<nbCase; j++){
+                    if(board.array[i][j]){
+                        std::cout<<"Piece ("<<i<<","<<j<<")\n";
+                        std::cout<<"Move :\n";
+                        std::vector<glm::vec2> t = board.array[i][j]->movePossible(board.array);
+                        std::cout<<"-------------------------------\n";
+                    }
+                    
+                }
+            }
+            std::cout<<"------------Selection--------------\n";
+
+            int ind_select = rand() % board.blackPieces.size();
+            Piece * selection = board.blackPieces.at(ind_select);
+            glm::vec2 coord = selection->getCoord();
+            std::cout<<"Piece\n";
+            std::cout << "coord (" << coord.x << ", " << coord.y << ")" << std::endl;
+
+            int ind_move = rand() % selection->movePossible(board.array).size();
+            glm::vec2 newcoord = selection->movePossible(board.array).at(ind_move);
+            std::cout<<"ind move "<<ind_move<<"\n";
+            std::cout << "new (" << newcoord.x << ", " << newcoord.y << ")" << std::endl;
+
+
+            std::cout<<"------------------MOVE-----------------\n";
+            
+            selection->move(newcoord, board.array);
+
+            renderer.Clear();
+
+            pause = true;
+    
+
+            while (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+                glfwPollEvents();
+            }
+        }
     }
+
     glfwTerminate();
 
     return 0;

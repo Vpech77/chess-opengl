@@ -26,7 +26,10 @@ class Plato
         std::vector<Object*> p;
         Object* createPiece3D(std::string color, std::string typ);
         Piece* array[8][8];
+        std::vector<Piece*> whitePieces;
+        std::vector<Piece*> blackPieces;
         void initArray();
+        void update();
 
 };
 

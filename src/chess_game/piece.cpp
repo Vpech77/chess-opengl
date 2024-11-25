@@ -24,6 +24,16 @@ std::string Piece::getColor(){
     return m_color;
 }
 
-void Piece::move(glm::vec2& newCoord){
+void Piece::move(glm::vec2& newCoord, Piece* (&array)[8][8]){
+    
+    int xcoord = m_coord.x;
+    int ycoord = m_coord.y;
+    int xnew = newCoord.x;
+    int ynew = newCoord.y;
+    
+    array[xcoord][ycoord] = nullptr;
     m_coord = newCoord;
+    array[xnew][ynew] = this;
+
+    
 }

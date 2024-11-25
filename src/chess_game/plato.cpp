@@ -34,20 +34,33 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr), p()
 }
 
 void Plato::initArray(){
+    // for (int col = 0; col < 8; ++col){
+    //     for (int li = 0; li < 8; ++li){
+    //         glm::vec2 pos(col, li);
+    //         if (li == 1){
+    //             array[col][li] = new Pawn("white", pos);
+    //         }
+    //          if (li == 6){
+    //             array[col][li] = new Pawn("black", pos);
+    //             blackPieces.push_back(array[col][li]);
+    //         }
+    //         else{
+    //             array[col][li] = nullptr;
+    //         }
+    //     }
+    // }
     for (int col = 0; col < 8; ++col){
         for (int li = 0; li < 8; ++li){
             glm::vec2 pos(col, li);
-            if (li == 1){
-                array[col][li] = new Pawn("white", pos);
-            }
-            else if (li == 6){
-                array[col][li] = new Pawn("black", pos);
-            }
-            else{
-                array[col][li] = nullptr;
-            }
+            array[col][li] = nullptr;
         }
     }
+
+    int col = 0;
+    int li = 6;
+    glm::vec2 pos(col, li);
+    array[col][li] = new Pawn("black", pos);
+    blackPieces.push_back(array[col][li]);
 
     // int liWhite = 0;
     // array[0][liWhite] = new Rook  ("white", glm::vec2(0, liWhite));
@@ -119,6 +132,8 @@ void Plato::Draw(VertexArray& va, Camera& cam, Shader& shader, Renderer& rendere
             if(array[i][j]){
                 glm::vec3 pos(i*tailleCase, j*tailleCase, 0);
                 renderCase(va, cam, shader, renderer, *p.at(array[i][j]->getType()), pos);
+                
+
             }
         }
     }
