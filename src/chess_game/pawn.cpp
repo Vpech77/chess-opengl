@@ -11,7 +11,7 @@ Pawn::Pawn(std::string color, glm::vec2 coord): Piece(color, coord)
     }
 }
 
-std::vector<glm::vec2> Pawn::movePossible(Piece* array[8][8]){
+std::vector<glm::vec2> Pawn::movePossible(Piece* (&array)[8][8]){
     std::vector<glm::vec2> lst;
 
     int x = this->getCoord().x;

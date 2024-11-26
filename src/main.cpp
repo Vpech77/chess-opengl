@@ -14,6 +14,7 @@
 #include "navigationcontrols.h"
 
 #include "plato.h"
+#include "game.h"
 
 
 int main()
@@ -75,7 +76,8 @@ int main()
 
     Camera cam(width, height);
     NavigationControls controls(window, &cam);
-    Plato board;
+    Game game;
+    int tour = 0;
 
     /************************** BOUCLE DE RENDU ***************************/
   
@@ -106,9 +108,8 @@ int main()
         renderer.Clear();
 
         if (pause){
-            board.Draw(va, cam, shader, renderer);
+            game.board.Draw(va, cam, shader, renderer);
         }
-
 
         ////////////////Partie rafraichissement de l'image et des évènements///////////////
         //Swap buffers : frame refresh
@@ -117,49 +118,14 @@ int main()
         //get the events
         glfwPollEvents();
 
-
         if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
             pause = !pause;
-            std::cout<<"------------stop-------------\n";
+            std::cout<<"#################### TOUR : "<<tour<< " ####################\n";
             
-
-            int nbCase = 8;
-            int tailleCase = 2;
-
-            for (int i=0; i<nbCase; i++){
-                for (int j=0; j<nbCase; j++){
-                    if(board.array[i][j]){
-                        std::cout<<"Piece ("<<i<<","<<j<<")\n";
-                        std::cout<<"Move :\n";
-                        std::vector<glm::vec2> t = board.array[i][j]->movePossible(board.array);
-                        std::cout<<"-------------------------------\n";
-                    }
-                    
-                }
-            }
-            std::cout<<"------------Selection--------------\n";
-
-            int ind_select = rand() % board.blackPieces.size();
-            Piece * selection = board.blackPieces.at(ind_select);
-            glm::vec2 coord = selection->getCoord();
-            std::cout<<"Piece\n";
-            std::cout << "coord (" << coord.x << ", " << coord.y << ")" << std::endl;
-
-            int ind_move = rand() % selection->movePossible(board.array).size();
-            glm::vec2 newcoord = selection->movePossible(board.array).at(ind_move);
-            std::cout<<"ind move "<<ind_move<<"\n";
-            std::cout << "new (" << newcoord.x << ", " << newcoord.y << ")" << std::endl;
-
-
-            std::cout<<"------------------MOVE-----------------\n";
-            
-            selection->move(newcoord, board.array);
-
-            renderer.Clear();
-
+            game.playTurn();
+            tour++;
             pause = true;
     
-
             while (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
                 glfwPollEvents();
             }

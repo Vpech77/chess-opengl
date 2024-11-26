@@ -10,4 +10,5 @@ add_library(chess_game STATIC piece.h  piece.cpp
                               king.h   king.cpp
                               queen.h  queen.cpp
                               headerPieces.h
-                              plato.h plato.cpp)
+                              plato.h plato.cpp
+                              game.h game.cpp)

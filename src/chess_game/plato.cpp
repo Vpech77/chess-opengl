@@ -49,6 +49,8 @@ void Plato::initArray(){
     //         }
     //     }
     // }
+
+
     for (int col = 0; col < 8; ++col){
         for (int li = 0; li < 8; ++li){
             glm::vec2 pos(col, li);
@@ -61,6 +63,13 @@ void Plato::initArray(){
     glm::vec2 pos(col, li);
     array[col][li] = new Pawn("black", pos);
     blackPieces.push_back(array[col][li]);
+
+
+    int x = 0;
+    int y = 1;
+    glm::vec2 pos2(x, y);
+    array[x][y] = new Pawn("white", pos2);
+    whitePieces.push_back(array[x][y]);
 
     // int liWhite = 0;
     // array[0][liWhite] = new Rook  ("white", glm::vec2(0, liWhite));
