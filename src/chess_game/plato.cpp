@@ -41,7 +41,7 @@ void Plato::initArray(){
                 array[col][li] = new Pawn("white", pos);
                 whitePieces.push_back(array[col][li]);
             }
-             if (li == 6){
+            else if (li == 6){
                 array[col][li] = new Pawn("black", pos);
                 blackPieces.push_back(array[col][li]);
             }

@@ -73,9 +73,9 @@ int main()
     VertexArray va;
     va.Bind();
 
-
     Camera cam(width, height);
     NavigationControls controls(window, &cam);
+
     Game game;
     int tour = 0;
 
@@ -122,7 +122,7 @@ int main()
             pause = !pause;
             std::cout<<"#################### TOUR : "<<tour<< " ####################\n";
             
-            // game.playTurn();
+            game.playTurn();
             tour++;
             pause = true;
 
