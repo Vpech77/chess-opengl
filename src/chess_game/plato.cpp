@@ -34,42 +34,43 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr), p()
 }
 
 void Plato::initArray(){
-    // for (int col = 0; col < 8; ++col){
-    //     for (int li = 0; li < 8; ++li){
-    //         glm::vec2 pos(col, li);
-    //         if (li == 1){
-    //             array[col][li] = new Pawn("white", pos);
-    //         }
-    //          if (li == 6){
-    //             array[col][li] = new Pawn("black", pos);
-    //             blackPieces.push_back(array[col][li]);
-    //         }
-    //         else{
-    //             array[col][li] = nullptr;
-    //         }
-    //     }
-    // }
-
-
     for (int col = 0; col < 8; ++col){
         for (int li = 0; li < 8; ++li){
             glm::vec2 pos(col, li);
-            array[col][li] = nullptr;
+            if (li == 1){
+                array[col][li] = new Pawn("white", pos);
+                whitePieces.push_back(array[col][li]);
+            }
+             if (li == 6){
+                array[col][li] = new Pawn("black", pos);
+                blackPieces.push_back(array[col][li]);
+            }
+            else{
+                array[col][li] = nullptr;
+            }
         }
     }
 
-    int col = 0;
-    int li = 6;
-    glm::vec2 pos(col, li);
-    array[col][li] = new Pawn("black", pos);
-    blackPieces.push_back(array[col][li]);
+
+    // for (int col = 0; col < 8; ++col){
+    //     for (int li = 0; li < 8; ++li){
+    //         glm::vec2 pos(col, li);
+    //         array[col][li] = nullptr;
+    //     }
+    // }
+
+    // int col = 0;
+    // int li = 6;
+    // glm::vec2 pos(col, li);
+    // array[col][li] = new Pawn("black", pos);
+    // blackPieces.push_back(array[col][li]);
 
 
-    int x = 0;
-    int y = 1;
-    glm::vec2 pos2(x, y);
-    array[x][y] = new Pawn("white", pos2);
-    whitePieces.push_back(array[x][y]);
+    // int x = 0;
+    // int y = 1;
+    // glm::vec2 pos2(x, y);
+    // array[x][y] = new Pawn("white", pos2);
+    // whitePieces.push_back(array[x][y]);
 
     // int liWhite = 0;
     // array[0][liWhite] = new Rook  ("white", glm::vec2(0, liWhite));

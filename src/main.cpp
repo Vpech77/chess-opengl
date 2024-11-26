@@ -122,9 +122,10 @@ int main()
             pause = !pause;
             std::cout<<"#################### TOUR : "<<tour<< " ####################\n";
             
-            game.playTurn();
+            // game.playTurn();
             tour++;
             pause = true;
+
     
             while (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
                 glfwPollEvents();
