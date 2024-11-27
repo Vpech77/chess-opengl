@@ -31,6 +31,10 @@ void Piece::move(glm::vec2& newCoord, Piece* (&array)[8][8]){
     int xnew = newCoord.x;
     int ynew = newCoord.y;
     
+    if (array[xnew][ynew]){
+        array[xnew][ynew] = nullptr;
+    }
+    
     array[xcoord][ycoord] = nullptr;
     m_coord = newCoord;
     array[xnew][ynew] = this;

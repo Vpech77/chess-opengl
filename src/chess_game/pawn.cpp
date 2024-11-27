@@ -21,8 +21,18 @@ std::vector<glm::vec2> Pawn::movePossible(Piece* (&array)[8][8]){
         if (y == 1){  // avance de deux
             lst.push_back(glm::vec2(x, 3));
         }
-        if (y != 7 && !(array[x][y+1])){
-            lst.push_back(glm::vec2(x, y+1));
+        if (y != 7){ // pas sur last line
+
+            if (!(array[x][y+1])){ // avance de un
+                lst.push_back(glm::vec2(x, y+1)); 
+            }
+            // miam miam
+            if (x != 0 && array[x-1][y+1] && array[x-1][y+1]->getColor() == "black"){ 
+                lst.push_back(glm::vec2(x-1, y+1));
+            }
+            if (x != 7 && array[x+1][y+1] && array[x+1][y+1]->getColor() == "black"){
+                lst.push_back(glm::vec2(x+1, y+1));
+            }
         }
     }
 
@@ -30,8 +40,17 @@ std::vector<glm::vec2> Pawn::movePossible(Piece* (&array)[8][8]){
         if (y == 6){  // avance de deux
             lst.push_back(glm::vec2(x, 4));
         }
-        if (y != 0 && !(array[x][y-1])){
-            lst.push_back(glm::vec2(x, y-1));
+        if (y != 0){
+            if (!(array[x][y-1])){ // avance de un
+                lst.push_back(glm::vec2(x, y-1));
+            }
+            // miam
+            if (x !=0 && array[x-1][y-1] && array[x-1][y-1]->getColor()=="white"){ 
+                lst.push_back(glm::vec2(x-1, y-1));
+            }
+            if (x != 7 && array[x+1][y-1] && array[x+1][y-1]->getColor()=="white"){
+                lst.push_back(glm::vec2(x+1, y-1));
+            }
         }
     }
 

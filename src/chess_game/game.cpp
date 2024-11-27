@@ -15,19 +15,19 @@ void Game::playTurn(){
 
     std::cout<<"------------------ Tour des "+ turn +" -----------------\n";
 
-    // int nbCase = 8;
-    // int tailleCase = 2;
+    int nbCase = 8;
+    int tailleCase = 2;
 
-    // for (int i=0; i<nbCase; i++){
-    //     for (int j=0; j<nbCase; j++){
-    //         if(board.array[i][j]){
-    //             std::cout<<"Piece ("<<i<<","<<j<<")\n";
-    //             std::cout<<"Move :\n";
-    //             std::vector<glm::vec2> t = board.array[i][j]->movePossible(board.array);
-    //             std::cout<<"-------------------------------\n";
-    //         }
-    //     }
-    // }
+    for (int i=0; i<nbCase; i++){
+        for (int j=0; j<nbCase; j++){
+            if(board.array[i][j]){
+                std::cout<<"Piece ("<<i<<","<<j<<")\n";
+                std::cout<<"Move :\n";
+                std::vector<glm::vec2> t = board.array[i][j]->movePossible(board.array);
+                std::cout<<"-------------------------------\n";
+            }
+        }
+    }
     std::cout<<"------------ Selection --------------\n";
     
     bool isMoveOkay = false;
