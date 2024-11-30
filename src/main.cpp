@@ -14,6 +14,7 @@
 #include "navigationcontrols.h"
 
 #include "plato.h"
+#include "game.h"
 
 
 int main()
@@ -40,8 +41,8 @@ int main()
     int height=600;
 
     //On récupère les dimensions de l'écran pour créer la fenètre
-    GLFWmonitor* primary = glfwGetPrimaryMonitor();
-    glfwGetMonitorWorkarea(primary,nullptr,nullptr, &width, &height);
+    // GLFWmonitor* primary = glfwGetPrimaryMonitor();
+    // glfwGetMonitorWorkarea(primary,nullptr,nullptr, &width, &height);
 
     //Enfin on crée la fenêtre
     GLFWwindow* window = glfwCreateWindow(width,height,"OpenGL_API",NULL,NULL);
@@ -72,10 +73,11 @@ int main()
     VertexArray va;
     va.Bind();
 
-
     Camera cam(width, height);
     NavigationControls controls(window, &cam);
-    Plato board;
+
+    Game game;
+    int tour = 0;
 
     /************************** BOUCLE DE RENDU ***************************/
   
@@ -92,6 +94,8 @@ int main()
     float lastTime = glfwGetTime();
     float currentTime, deltaTime;
 
+    bool pause = true;
+
     while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && !glfwWindowShouldClose(window)){
 
         currentTime = glfwGetTime();
@@ -101,18 +105,34 @@ int main()
         controls.update(deltaTime, &shader);
         cam.computeMatrices(width, height);
 
-        //////////////// AFFICHAGE DES OBJETS ///////////////
         renderer.Clear();
 
-        board.Draw(va, cam, shader, renderer);
-
+        if (pause){
+            game.board.Draw(va, cam, shader, renderer);
+        }
 
         ////////////////Partie rafraichissement de l'image et des évènements///////////////
         //Swap buffers : frame refresh
         glfwSwapBuffers(window);
+
         //get the events
         glfwPollEvents();
+
+        if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+            pause = !pause;
+            std::cout<<"#################### TOUR : "<<tour<< " ####################\n";
+            
+            game.playTurn();
+            tour++;
+            pause = true;
+
+    
+            while (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+                glfwPollEvents();
+            }
+        }
     }
+
     glfwTerminate();
 
     return 0;
