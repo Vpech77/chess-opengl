@@ -1,4 +1,7 @@
 #include "piece.h"
+#include "plato.h"
+#include <algorithm>
+#include <iostream>
 
 Piece::Piece(std::string color, glm::vec2 coord)
     :m_color(color), m_coord(coord), m_typ(TypePiece::WHITE_PAWN)
@@ -24,20 +27,37 @@ std::string Piece::getColor(){
     return m_color;
 }
 
-void Piece::move(glm::vec2& newCoord, Piece* (&array)[8][8]){
-    
+void Piece::move(glm::vec2& newCoord, Plato& board){
     int xcoord = m_coord.x;
     int ycoord = m_coord.y;
     int xnew = newCoord.x;
     int ynew = newCoord.y;
     
-    if (array[xnew][ynew]){
-        array[xnew][ynew] = nullptr;
+    if (board.array[xnew][ynew]){
+        glm::vec2 targetPos(xnew, ynew);
+        if (board.array[xnew][ynew]->getColor()=="black"){
+            std::cout<<"######!(•̀ᴗ•́)و MIAM BlackPiece !(•̀ᴗ•́)و ######\n";
+            auto it = std::remove_if(board.blackPieces.begin(), 
+                                     board.blackPieces.end(), 
+                                     [&targetPos](Piece* p) 
+                                     {return p->m_coord == targetPos;});
+            board.blackPieces.erase(it, board.blackPieces.end());                         
+
+        }
+        else {
+            std::cout<<"######!(•̀ᴗ•́)و MIAM WhitePiece !(•̀ᴗ•́)و ######\n";
+            auto it = std::remove_if(board.whitePieces.begin(), 
+                                     board.whitePieces.end(), 
+                                     [&targetPos](Piece* p) 
+                                     {return p->m_coord == targetPos;});
+            board.whitePieces.erase(it, board.whitePieces.end());
+        }
+
+            
+        board.array[xnew][ynew] = nullptr;
     }
     
-    array[xcoord][ycoord] = nullptr;
+    board.array[xcoord][ycoord] = nullptr;
     m_coord = newCoord;
-    array[xnew][ynew] = this;
-
-    
+    board.array[xnew][ynew] = this;
 }

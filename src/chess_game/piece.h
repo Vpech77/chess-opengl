@@ -8,6 +8,8 @@
 
 #include "typePiece.h"
 
+class Plato;
+
 class Piece
 {
     private:
@@ -23,7 +25,7 @@ class Piece
         std::string getColor();
         void setType(TypePiece typ);
         virtual std::vector<glm::vec2> movePossible(Piece* (&array)[8][8]) = 0;
-        void move(glm::vec2& newCoord, Piece* (&array)[8][8]);
+        void move(glm::vec2& newCoord, Plato& board);
         glm::vec2 getCoord();
 
 };

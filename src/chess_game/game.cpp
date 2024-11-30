@@ -53,7 +53,7 @@ void Game::playTurn(){
 
             std::cout<<"------------------ MOVE OK -----------------\n";
             
-            selection->move(newcoord, board.array);
+            selection->move(newcoord, board);
             isMoveOkay = true;
             isWhiteTurn = !isWhiteTurn;
         }

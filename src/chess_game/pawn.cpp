@@ -18,7 +18,7 @@ std::vector<glm::vec2> Pawn::movePossible(Piece* (&array)[8][8]){
     int y = this->getCoord().y;
 
     if (this->getColor() == "white"){
-        if (y == 1){  // avance de deux
+        if (y == 1 && !(array[x][2]) && !(array[x][3])){  // avance de deux
             lst.push_back(glm::vec2(x, 3));
         }
         if (y != 7){ // pas sur last line
@@ -37,7 +37,7 @@ std::vector<glm::vec2> Pawn::movePossible(Piece* (&array)[8][8]){
     }
 
     else {
-        if (y == 6){  // avance de deux
+        if (y == 6 && !(array[x][5]) && !(array[x][4])){  // avance de deux
             lst.push_back(glm::vec2(x, 4));
         }
         if (y != 0){
