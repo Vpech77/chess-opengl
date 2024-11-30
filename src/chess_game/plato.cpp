@@ -17,8 +17,8 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr), p()
 
     p.push_back(createPiece3D("white", "pawn"));
     p.push_back(createPiece3D("black", "pawn"));
-    // p.push_back(createPiece3D("white", "rook"));
-    // p.push_back(createPiece3D("black", "rook"));
+    p.push_back(createPiece3D("white", "rook"));
+    p.push_back(createPiece3D("black", "rook"));
     // p.push_back(createPiece3D("white", "knight"));
     // p.push_back(createPiece3D("black", "knight"));
     // p.push_back(createPiece3D("white", "bishop"));
@@ -51,7 +51,6 @@ void Plato::initArray(){
         }
     }
 
-
     // for (int col = 0; col < 8; ++col){
     //     for (int li = 0; li < 8; ++li){
     //         glm::vec2 pos(col, li);
@@ -60,37 +59,41 @@ void Plato::initArray(){
     // }
 
     // int col = 0;
-    // int li = 6;
+    // int li = 0;
     // glm::vec2 pos(col, li);
-    // array[col][li] = new Pawn("black", pos);
+    // array[col][li] = new Rook("black", pos);
     // blackPieces.push_back(array[col][li]);
 
 
-    // int x = 0;
-    // int y = 1;
+    // int x = 7;
+    // int y = 7;
     // glm::vec2 pos2(x, y);
-    // array[x][y] = new Pawn("white", pos2);
+    // array[x][y] = new Rook("white", pos2);
     // whitePieces.push_back(array[x][y]);
 
-    // int liWhite = 0;
-    // array[0][liWhite] = new Rook  ("white", glm::vec2(0, liWhite));
+    int liWhite = 0;
+    array[0][liWhite] = new Rook("white", glm::vec2(0, liWhite));
+    whitePieces.push_back(array[0][liWhite]);
     // array[1][liWhite] = new Knight("white", glm::vec2(1, liWhite));
     // array[2][liWhite] = new Bishop("white", glm::vec2(2, liWhite));
     // array[3][liWhite] = new Queen ("white", glm::vec2(3, liWhite));
     // array[4][liWhite] = new King  ("white", glm::vec2(4, liWhite));
     // array[5][liWhite] = new Bishop("white", glm::vec2(5, liWhite));
     // array[6][liWhite] = new Knight("white", glm::vec2(6, liWhite));
-    // array[7][liWhite] = new Rook  ("white", glm::vec2(7, liWhite));
+    array[7][liWhite] = new Rook  ("white", glm::vec2(7, liWhite));
+    whitePieces.push_back(array[7][liWhite]);
 
-    // int liBlack = 7;
-    // array[0][liBlack] = new Rook  ("black", glm::vec2(0, liBlack));
+    int liBlack = 7;
+    array[0][liBlack] = new Rook  ("black", glm::vec2(0, liBlack));
+    blackPieces.push_back(array[0][liBlack]);
     // array[1][liBlack] = new Knight("black", glm::vec2(1, liBlack));
     // array[2][liBlack] = new Bishop("black", glm::vec2(2, liBlack));
     // array[3][liBlack] = new King  ("black", glm::vec2(3, liBlack));
     // array[4][liBlack] = new Queen ("black", glm::vec2(4, liBlack));
     // array[5][liBlack] = new Bishop("black", glm::vec2(5, liBlack));
     // array[6][liBlack] = new Knight("black", glm::vec2(6, liBlack));
-    // array[7][liBlack] = new Rook  ("black", glm::vec2(7, liBlack));
+    array[7][liBlack] = new Rook  ("black", glm::vec2(7, liBlack));
+    blackPieces.push_back(array[7][liBlack]);
     
 
 }

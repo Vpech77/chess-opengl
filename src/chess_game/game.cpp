@@ -35,6 +35,11 @@ void Game::playTurn(){
     int secure = 0;
 
     while(!isMoveOkay){
+
+        if (board.blackPieces.size() == 0 || board.whitePieces.size()==0){
+            break;
+        }
+
         // Selection aleatoire de la piece 
         int ind_select = rand() % (isWhiteTurn ? board.whitePieces.size() : board.blackPieces.size());
         Piece * selection = isWhiteTurn ? board.whitePieces.at(ind_select) : board.blackPieces.at(ind_select);
