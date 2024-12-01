@@ -54,10 +54,6 @@ std::vector<glm::vec2> Pawn::movePossible(Piece* (&array)[8][8]){
         }
     }
 
-    for (const auto& v : lst) { 
-        std::cout << "(" << v.x << ", " << v.y << ")" << std::endl; 
-        }
-
     return lst;
 
 }
