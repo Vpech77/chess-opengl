@@ -94,9 +94,5 @@ std::vector<glm::vec2> Bishop::movePossible(Piece* (&array)[8][8]){
         }
     }
 
-
-    for (const auto& v : lst) { 
-        std::cout << "(" << v.x << ", " << v.y << ")" << std::endl; 
-    }
     return lst;
 }

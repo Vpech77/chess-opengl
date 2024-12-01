@@ -51,25 +51,6 @@ void Plato::initArray(){
         }
     }
 
-    // for (int col = 0; col < 8; ++col){
-    //     for (int li = 0; li < 8; ++li){
-    //         glm::vec2 pos(col, li);
-    //         array[col][li] = nullptr;
-    //     }
-    // }
-
-    // int col = 4;
-    // int li = 4;
-    // glm::vec2 pos(col, li);
-    // array[col][li] = new Queen("white", pos);
-    // blackPieces.push_back(array[col][li]);
-
-    // int x = 5;
-    // int y = 5;
-    // glm::vec2 pos2(x, y);
-    // array[x][y] = new Queen("black", pos2);
-    // whitePieces.push_back(array[x][y]);
-
     /************** Remplissage du plato **************/
 
     int liWhite = 0;

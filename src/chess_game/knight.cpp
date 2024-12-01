@@ -33,8 +33,5 @@ std::vector<glm::vec2> Knight::movePossible(Piece* (&array)[8][8]){
         }
     }
 
-    for (const auto& v : moves) { 
-        std::cout << "(" << v.x << ", " << v.y << ")" << std::endl; 
-    }
     return moves;
 }

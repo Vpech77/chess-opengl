@@ -19,11 +19,9 @@ std::vector<glm::vec2> Queen::movePossible(Piece* (&array)[8][8]){
     Rook rook(this->getColor(), this->getCoord());
 
     std::vector<glm::vec2> moves = bishop.movePossible(array);
-
     std::vector<glm::vec2> moves_rook = rook.movePossible(array);
 
     moves.insert(moves.end(), moves_rook.begin(), moves_rook.end());
-
 
     return moves;
 }
