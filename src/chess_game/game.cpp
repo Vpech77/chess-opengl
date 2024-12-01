@@ -18,16 +18,17 @@ void Game::playTurn(){
     int nbCase = 8;
     int tailleCase = 2;
 
-    for (int i=0; i<nbCase; i++){
-        for (int j=0; j<nbCase; j++){
-            if(board.array[i][j]){
-                std::cout<<"Piece ("<<i<<","<<j<<")\n";
-                std::cout<<"Move :\n";
-                std::vector<glm::vec2> t = board.array[i][j]->movePossible(board.array);
-                std::cout<<"-------------------------------\n";
-            }
-        }
-    }
+    // for (int i=0; i<nbCase; i++){
+    //     for (int j=0; j<nbCase; j++){
+    //         if(board.array[i][j]){
+    //             std::cout<<"Piece ("<<i<<","<<j<<")\n";
+    //             std::cout<<"Move :\n";
+    //             std::vector<glm::vec2> t = board.array[i][j]->movePossible(board.array);
+    //             std::cout<<"-------------------------------\n";
+    //         }
+    //     }
+    // }
+
     std::cout<<"------------ Selection --------------\n";
     
     bool isMoveOkay = false;
@@ -45,7 +46,7 @@ void Game::playTurn(){
         Piece * selection = isWhiteTurn ? board.whitePieces.at(ind_select) : board.blackPieces.at(ind_select);
         
         glm::vec2 coord = selection->getCoord();
-        std::cout<<"Piece\n";
+        std::cout<<"Piece : "<<selection->getType()<<"\n";
         std::cout << "coord (" << coord.x << ", " << coord.y << ")" << std::endl;
 
         // Selection aleatoire des moves
