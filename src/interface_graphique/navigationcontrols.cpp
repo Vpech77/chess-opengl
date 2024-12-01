@@ -79,7 +79,7 @@ void NavigationControls::update(float deltaTime, Shader *shader)
             m_Camera->position -= right * deltaTime * speed;
         }
         // go up
-        if (glfwGetKey(m_Window, GLFW_KEY_SPACE ) == GLFW_PRESS){
+        if (glfwGetKey(m_Window, GLFW_KEY_U ) == GLFW_PRESS){
             m_Camera->position += up * deltaTime * speed;
         }
         // go down

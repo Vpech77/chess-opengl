@@ -1,7 +1,7 @@
 #include "camera.h"
 #include "renderer.h"
 
-Camera::Camera(float width, float height):position(8,8,25), horizontalAngle(3.14), verticalAngle(0), FoV(45)
+Camera::Camera(float width, float height):position(7.02223,-12.5016,17.4529), horizontalAngle(3.14), verticalAngle(0.867223), FoV(45)
 {
     computeMatrices(width, height);
 }
