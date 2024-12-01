@@ -54,7 +54,7 @@ void Game::playTurn(){
         if (!movePoss.empty()){
             int ind_move = rand() % movePoss.size();
             glm::vec2 newcoord = movePoss.at(ind_move);
-            std::cout<<"ind move "<<ind_move<<"\n";
+            std::cout<<"\nind move "<<ind_move<<"\n";
             std::cout << "newCoord (" << newcoord.x << ", " << newcoord.y << ")" << std::endl;
 
             std::cout<<"------------------ MOVE OK -----------------\n";

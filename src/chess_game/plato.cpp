@@ -23,8 +23,8 @@ Plato::Plato(): caseBlack(nullptr), caseWhite(nullptr), p()
     p.push_back(createPiece3D("black", "knight"));
     p.push_back(createPiece3D("white", "bishop"));
     p.push_back(createPiece3D("black", "bishop"));
-    // p.push_back(createPiece3D("white", "king"));
-    // p.push_back(createPiece3D("black", "king"));
+    p.push_back(createPiece3D("white", "king"));
+    p.push_back(createPiece3D("black", "king"));
     // p.push_back(createPiece3D("white", "queen"));
     // p.push_back(createPiece3D("black", "queen"));
 
@@ -61,13 +61,13 @@ void Plato::initArray(){
     // int col = 4;
     // int li = 4;
     // glm::vec2 pos(col, li);
-    // array[col][li] = new Bishop("black", pos);
+    // array[col][li] = new Knight("white", pos);
     // blackPieces.push_back(array[col][li]);
 
     // int x = 5;
     // int y = 5;
     // glm::vec2 pos2(x, y);
-    // array[x][y] = new Bishop("white", pos2);
+    // array[x][y] = new Knight("black", pos2);
     // whitePieces.push_back(array[x][y]);
 
     /************** Remplissage du plato **************/
@@ -80,8 +80,8 @@ void Plato::initArray(){
     array[2][liWhite] = new Bishop("white", glm::vec2(2, liWhite));
     whitePieces.push_back(array[2][liWhite]);
     // array[3][liWhite] = new Queen ("white", glm::vec2(3, liWhite));
-    // array[4][liWhite] = new King  ("white", glm::vec2(4, liWhite));
-
+    array[4][liWhite] = new King  ("white", glm::vec2(4, liWhite));
+    whitePieces.push_back(array[4][liWhite]);
     array[5][liWhite] = new Bishop("white", glm::vec2(5, liWhite));
     whitePieces.push_back(array[5][liWhite]);
     array[6][liWhite] = new Knight("white", glm::vec2(6, liWhite));
@@ -96,7 +96,8 @@ void Plato::initArray(){
     blackPieces.push_back(array[1][liBlack]);
     array[2][liBlack] = new Bishop("black", glm::vec2(2, liBlack));
     blackPieces.push_back(array[2][liBlack]);
-    // array[3][liBlack] = new King  ("black", glm::vec2(3, liBlack));
+    array[3][liBlack] = new King  ("black", glm::vec2(3, liBlack));
+    blackPieces.push_back(array[3][liBlack]);
     // array[4][liBlack] = new Queen ("black", glm::vec2(4, liBlack));
     array[5][liBlack] = new Bishop("black", glm::vec2(5, liBlack));
     blackPieces.push_back(array[5][liBlack]);

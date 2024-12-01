@@ -126,7 +126,6 @@ int main()
             tour++;
             pause = true;
 
-    
             while (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
                 glfwPollEvents();
             }
